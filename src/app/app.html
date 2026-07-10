@@ -1,0 +1,107 @@
+<div class="flex min-h-screen flex-col bg-cream text-stone-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-navy shadow-lg">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <a routerLink="/" (click)="closeMenu()" class="py-1.5">
+        <span class="text-lg font-extrabold tracking-tight text-white sm:text-xl">
+          Maislabyrinth <span class="text-mais">Freiamt</span>
+        </span>
+      </a>
+
+      <!-- Desktop-Navigation -->
+      <nav class="hidden items-center gap-1 lg:flex">
+        @for (link of navLinks; track link.path) {
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="bg-mais text-navy"
+            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+            class="rounded-full px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-navy-light"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </nav>
+
+      <!-- Mobile: Burger-Button -->
+      <button
+        type="button"
+        (click)="toggleMenu()"
+        class="rounded-lg p-2 text-white hover:bg-navy-light lg:hidden"
+        aria-label="Menü öffnen oder schliessen"
+        [attr.aria-expanded]="menuOpen()"
+      >
+        @if (menuOpen()) {
+          <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        } @else {
+          <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        }
+      </button>
+    </div>
+
+    <!-- Mobile-Navigation -->
+    @if (menuOpen()) {
+      <nav class="border-t border-navy-light/40 bg-navy px-4 pb-4 pt-2 lg:hidden">
+        @for (link of navLinks; track link.path) {
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="bg-mais text-navy"
+            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+            (click)="closeMenu()"
+            class="block rounded-lg px-3 py-2.5 font-semibold text-white transition hover:bg-navy-light"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </nav>
+    }
+  </header>
+
+  <!-- Seiteninhalt -->
+  <main class="flex-1">
+    <router-outlet />
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 bg-navy-dark text-white">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
+      <div>
+        <h3 class="mb-3 text-lg font-bold text-mais">Maislabyrinth Freiamt</h3>
+        <p class="text-sm leading-relaxed">
+          Luegetenstrasse, Villmergen<br />
+          Geöffnet im August &amp; September<br />
+          Täglich 9 bis 19 Uhr
+        </p>
+      </div>
+      <div>
+        <h3 class="mb-3 text-lg font-bold text-mais">Kontakt</h3>
+        <p class="text-sm leading-relaxed">
+          <a href="mailto:info@maislabyrinth-freiamt.ch" class="underline hover:text-mais">
+            info&#64;maislabyrinth-freiamt.ch
+          </a>
+          <br />
+          In dringenden Fällen:
+          <a href="tel:+41787253230" class="underline hover:text-mais">078 725 32 30</a>
+        </p>
+      </div>
+      <div>
+        <h3 class="mb-3 text-lg font-bold text-mais">Organisiert von</h3>
+        <p class="text-sm leading-relaxed">
+          <a href="https://www.chnorrlimorrli.ch" target="_blank" rel="noopener" class="underline hover:text-mais">
+            Verein Chnorrlimorrli
+          </a>
+          <br />
+          <a href="https://www.biohof-farngut.ch" target="_blank" rel="noopener" class="underline hover:text-mais">
+            Biohof Farngut
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-navy-light/30 py-4 text-center text-xs text-white/60">
+      © 2026 Verein Chnorrlimorrli &amp; Biohof Farngut
+    </div>
+  </footer>
+</div>

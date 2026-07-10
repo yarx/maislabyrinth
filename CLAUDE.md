@@ -4,14 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Website for the Maislabyrinth Villmergen (a corn maze attraction in Villmergen, Switzerland). Content is in German.
+Website for the Maislabyrinth Freiamt (a corn maze attraction in Villmergen, Switzerland). Content is in German (Swiss German tone, no ß — use ss).
 
 ## Architecture
 
-Static site hosted on **GitHub Pages** with a custom domain (`maislabyrinth-freiamt.ch`, configured via `CNAME`). The current `index.html` is a single-file placeholder ("Hier entsteht die Webseite…") with inline CSS — no build step, no dependencies, no JS framework.
+**Angular** (standalone components, signals) styled exclusively with **Tailwind CSS v4** utility classes in the HTML templates — no component CSS files. The only stylesheet is `src/styles.css`, which contains just the Tailwind import; do not add CSS files or `styleUrl`s.
+
+- Pages live in `src/app/pages/` (one `.ts` + one `.html` per route); routes are defined in `src/app/app.routes.ts`.
+- Header/nav/footer live in the root component (`src/app/app.html`).
+- Static assets (images, `CNAME`) live in `public/`; `public/CNAME` must ship with the build output — it controls the custom domain (`maislabyrinth-freiamt.ch`).
+- The Verlosung page (`/verlosung`, linked via QR code on-site) checks the solution word ("Polenta", case-insensitive) and then submits entries via formsubmit.co to info@maislabyrinth-freiamt.ch.
+- Dashed-border placeholder blocks marked with `TODO` comments stand in for graphics (signs/sponsor boards) that haven't been delivered yet.
 
 ## Workflow
 
-- No build, lint, or test tooling. Edit `index.html` directly and preview by opening it in a browser (e.g. `open index.html`).
-- Pushes to `main` deploy automatically via GitHub Pages.
-- Do not remove or rename `CNAME` — it controls the custom domain binding.
+- `npm start` — dev server on :4200; `npm run build` — production build to `dist/maislabyrinth-freiamt/browser`.
+- Deployment: pushes to `main` run `.github/workflows/deploy.yml`, which builds and publishes to GitHub Pages (Pages source must be set to "GitHub Actions"). The workflow copies `index.html` to `404.html` so SPA deep links like `/verlosung` work.
+- Do not remove or rename `CNAME` / `public/CNAME` — they control the custom domain binding.

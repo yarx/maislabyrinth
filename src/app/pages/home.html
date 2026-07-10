@@ -1,0 +1,92 @@
+<!-- Hero -->
+<section class="bg-navy text-white">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-14 text-center lg:flex-row lg:text-left">
+    <div class="flex-1">
+      <p class="mb-2 text-2xl font-bold text-mais">Hoi zäme!</p>
+      <h1 class="text-4xl font-extrabold leading-tight sm:text-5xl">
+        Willkommen beim<br />
+        <span class="text-mais">Maislabyrinth im Freiamt</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed">
+        Wir – der Verein Chnorrlimorrli und der Biohof Farngut – wollen ein cooles Erlebnis
+        schaffen für Kinder und Familien. Im Maislabyrinth wartet ein tolles Abenteuer und ein
+        cooles Rätsel für Jung und Alt. Bei der Verlosung gibt es tolle Preise zu gewinnen.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+        <a
+          routerLink="/verlosung"
+          class="rounded-full bg-mais px-6 py-3 font-bold text-navy shadow-md transition hover:bg-mais-dark"
+        >
+          Zur Verlosung 🎁
+        </a>
+        <a
+          routerLink="/informationen"
+          class="rounded-full border-2 border-mais px-6 py-3 font-bold text-white transition hover:bg-navy-light"
+        >
+          Wichtige Informationen
+        </a>
+      </div>
+    </div>
+
+    <div class="flex flex-1 flex-col items-center gap-6">
+      <!-- Eröffnungs-Schild -->
+      <div
+        class="-rotate-3 rounded-xl border-[6px] border-slate-300 bg-navy-dark px-8 py-5 shadow-2xl"
+      >
+        <p class="text-center text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl">
+          Eröffnung:<br /><span class="text-mais">1. August 2026!</span>
+        </p>
+      </div>
+
+      <!-- Chnorrli zwingend auf weissem Hintergrund (Bild hat weissen Hintergrund) -->
+      <div class="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+        <img
+          src="assets/chnorrli-eingang.jpg"
+          alt="Chnorrli, das Maskottchen des Maislabyrinths Freiamt"
+          width="500"
+          height="675"
+          class="mx-auto w-full max-w-xs"
+        />
+        <img
+          src="assets/schild-farngut.jpg"
+          alt="Farngut Biohofladen"
+          width="500"
+          height="310"
+          class="mx-auto mt-5 w-44 rounded-lg shadow-md"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Infos in Kürze -->
+<section class="mx-auto max-w-6xl px-4 py-14">
+  <div class="grid gap-6 sm:grid-cols-3">
+    <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10">
+      <span class="text-4xl">🕘</span>
+      <h2 class="mt-3 text-xl font-bold text-navy">Öffnungszeiten</h2>
+      <p class="mt-2 leading-relaxed text-stone-700">
+        Geöffnet in den Monaten <strong>August und September</strong> – täglich von
+        <strong>9 bis 19 Uhr</strong>.
+      </p>
+    </div>
+    <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10">
+      <span class="text-4xl">🛝</span>
+      <h2 class="mt-3 text-xl font-bold text-navy">Verweilen &amp; Geniessen</h2>
+      <p class="mt-2 leading-relaxed text-stone-700">
+        Ein Silo-Spielplatz und ein schattiger Chill-Bereich laden zum Verweilen ein. Dort kann
+        man Getränke, Früchte und Glacé geniessen.
+      </p>
+    </div>
+    <div class="rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10">
+      <span class="text-4xl">🎁</span>
+      <h2 class="mt-3 text-xl font-bold text-navy">Rätsel &amp; Verlosung</h2>
+      <p class="mt-2 leading-relaxed text-stone-700">
+        Löse das Rätsel im Labyrinth und gewinne tolle Preise bei der
+        <a routerLink="/verlosung" class="font-semibold text-navy underline">Verlosung</a>.
+      </p>
+    </div>
+  </div>
+
+  <p class="mt-12 text-center text-2xl font-bold text-navy">Wir wünschen viel Spass! 🌽</p>
+</section>

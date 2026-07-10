@@ -1,0 +1,153 @@
+<section class="mx-auto max-w-3xl px-4 py-12">
+  <h1 class="text-center text-4xl font-extrabold text-navy">Verlosung 🎁</h1>
+
+  <!-- TODO: Sobald die Verlosung startet, hier die Infos vom Verlosungs-Schild ergänzen (Verlosung & Preise) -->
+  @if (!verlosungAktiv) {
+    <!-- Verlosung noch nicht gestartet -->
+    <div class="mt-8 rounded-2xl bg-white p-10 text-center shadow-md ring-1 ring-navy/10">
+      <span class="text-6xl">🌽</span>
+      <h2 class="mt-4 text-3xl font-extrabold text-navy">Es geht bald los!</h2>
+      <p class="mt-4 text-lg leading-relaxed">
+        Die Verlosung startet, sobald das Maislabyrinth eröffnet ist –
+        <strong>am 1. August 2026</strong>. Ab dann kannst du hier das Lösungswort aus dem
+        Labyrinth eingeben und tolle Preise gewinnen. Wir freuen uns auf dich!
+      </p>
+    </div>
+  } @else {
+    @switch (schritt()) {
+    <!-- Schritt 1: Lösungswort -->
+    @case ('raetsel') {
+      <div class="mt-8 rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10 sm:p-10">
+        <h2 class="text-2xl font-bold text-navy">Hast du das Rätsel gelöst?</h2>
+        <p class="mt-3 leading-relaxed">
+          Gib hier das Lösungswort aus dem Maislabyrinth ein. Ist es richtig, kannst du an der
+          Verlosung teilnehmen und tolle Preise gewinnen!
+        </p>
+
+        <form (ngSubmit)="pruefeLoesungswort()" class="mt-6">
+          <label for="loesungswort" class="block font-semibold text-navy">Lösungswort</label>
+          <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+            <input
+              id="loesungswort"
+              name="loesungswort"
+              type="text"
+              required
+              [(ngModel)]="loesungswort"
+              placeholder="Dein Lösungswort…"
+              class="flex-1 rounded-full border-2 border-mais bg-cream px-5 py-3 text-lg outline-none transition focus:border-navy"
+            />
+            <button
+              type="submit"
+              class="rounded-full bg-navy px-8 py-3 font-bold text-white shadow-md transition hover:bg-navy-light"
+            >
+              Prüfen
+            </button>
+          </div>
+
+          @if (falschesWort()) {
+            <p class="mt-4 rounded-xl bg-red-100 p-4 font-semibold text-red-800">
+              Leider falsch. 🌽 Auf ins Labyrinth – dort findest du die Hinweise zum Lösungswort!
+            </p>
+          }
+        </form>
+      </div>
+    }
+
+    <!-- Schritt 2: Teilnahmeformular -->
+    @case ('formular') {
+      <div class="mt-8 rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10 sm:p-10">
+        <p class="rounded-xl bg-green-100 p-4 text-lg font-bold text-navy">
+          🎉 Richtig! Das Lösungswort stimmt.
+        </p>
+        <h2 class="mt-6 text-2xl font-bold text-navy">Jetzt an der Verlosung teilnehmen</h2>
+        <p class="mt-2 leading-relaxed">
+          Fülle das Formular aus – mit etwas Glück gewinnst du einen der tollen Preise.
+        </p>
+
+        <form (ngSubmit)="sendeTeilnahme()" class="mt-6 space-y-5">
+          <div>
+            <label for="name" class="block font-semibold text-navy">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              [(ngModel)]="name"
+              placeholder="Vorname und Nachname"
+              class="mt-2 w-full rounded-xl border-2 border-mais bg-cream px-4 py-3 outline-none transition focus:border-navy"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block font-semibold text-navy">E-Mail</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              [(ngModel)]="email"
+              placeholder="deine@mail.ch"
+              class="mt-2 w-full rounded-xl border-2 border-mais bg-cream px-4 py-3 outline-none transition focus:border-navy"
+            />
+          </div>
+
+          <div>
+            <label for="handy" class="block font-semibold text-navy">Handy-Nummer</label>
+            <input
+              id="handy"
+              name="handy"
+              type="tel"
+              required
+              [(ngModel)]="handy"
+              placeholder="079 123 45 67"
+              class="mt-2 w-full rounded-xl border-2 border-mais bg-cream px-4 py-3 outline-none transition focus:border-navy"
+            />
+          </div>
+
+          <fieldset>
+            <legend class="font-semibold text-navy">
+              Welchen Preis bevorzugst du, falls du gewinnst?
+            </legend>
+            <div class="mt-2 space-y-2">
+              @for (preis of preise; track preis) {
+                <label
+                  class="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-mais bg-cream px-4 py-3 transition has-checked:border-navy has-checked:bg-mais/15"
+                >
+                  <input
+                    type="radio"
+                    name="wunschpreis"
+                    required
+                    [value]="preis"
+                    [(ngModel)]="wunschpreis"
+                    class="h-5 w-5 accent-navy"
+                  />
+                  <span class="font-medium">{{ preis }}</span>
+                </label>
+              }
+            </div>
+          </fieldset>
+
+          <button
+            type="submit"
+            class="w-full rounded-full bg-navy px-8 py-4 text-lg font-bold text-white shadow-md transition hover:bg-navy-light"
+          >
+            Teilnahme absenden 🎁
+          </button>
+        </form>
+      </div>
+    }
+
+    <!-- Schritt 3: Bestätigung -->
+    @case ('fertig') {
+      <div class="mt-8 rounded-2xl bg-white p-10 text-center shadow-md ring-1 ring-navy/10">
+        <span class="text-6xl">🎉</span>
+        <h2 class="mt-4 text-3xl font-extrabold text-navy">Du bist dabei!</h2>
+        <p class="mt-4 text-lg leading-relaxed">
+          Deine Teilnahme an der Verlosung ist eingegangen. Die Gewinnerinnen und Gewinner werden
+          nach der Verlosung benachrichtigt. Viel Glück! 🍀
+        </p>
+      </div>
+    }
+    }
+  }
+</section>

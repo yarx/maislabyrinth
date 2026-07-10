@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Farbpalette gemäss Info-Flyer (Gelb/Navy) */
+@theme {
+  --color-mais: #f7d239;
+  --color-mais-dark: #e2c00d;
+  --color-navy: #014270;
+  --color-navy-light: #27508f;
+  --color-navy-dark: #122a4f;
+  --color-cream: #fdf8e4;
+}
