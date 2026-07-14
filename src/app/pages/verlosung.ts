@@ -1,5 +1,7 @@
-import { Component, ElementRef, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, computed, inject, signal, viewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 type Schritt = 'raetsel' | 'formular' | 'fertig';
 type SendeFehler = 'captcha' | 'senden' | null;
@@ -12,6 +14,9 @@ const LOESUNGSWORT_HASH = '833120237f894b1daaddff8a2b6a3fd7303e7a5ddfcd9cf4937e2
 
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfn_Hfl0AbPpBaDz7JUPBdG1hBmed4lxZU7ueBwjfQ8010YYWrq3US0wp5U_ywZZQxig/exec';
 const RECAPTCHA_SITE_KEY = '6LeqEVMtAAAAAIVE5e3-uvRzHgAKCB-utloAb2l9';
+
+// Ab diesem Zeitpunkt (lokale Zeit) ist die Verlosung automatisch freigeschaltet
+const VERLOSUNG_START = new Date(2026, 7, 1); // 1. August 2026, 00:00 Uhr
 
 declare const grecaptcha: {
   ready(callback: () => void): void;
@@ -26,8 +31,11 @@ declare const grecaptcha: {
   templateUrl: './verlosung.html',
 })
 export class Verlosung {
-  // Auf true setzen, sobald das Maislabyrinth eröffnet ist und die Verlosung startet
-  protected readonly verlosungAktiv = false;
+  // Automatisch aktiv ab VERLOSUNG_START; mit ?test=1 in der URL zum Testen übersteuerbar
+  private readonly queryParams = toSignal(inject(ActivatedRoute).queryParamMap);
+  protected readonly verlosungAktiv = computed(
+    () => (this.queryParams()?.has('test') ?? false) || Date.now() >= VERLOSUNG_START.getTime(),
+  );
 
   protected readonly preise = [
     'Übernachtung im Planzer-Motel',
