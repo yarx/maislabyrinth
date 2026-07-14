@@ -1,7 +1,6 @@
 <section class="mx-auto max-w-3xl px-4 py-12">
   <h1 class="text-center text-4xl font-extrabold text-navy">Verlosung 🎁</h1>
 
-  <!-- TODO: Sobald die Verlosung startet, hier die Infos vom Verlosungs-Schild ergänzen (Verlosung & Preise) -->
   @if (!verlosungAktiv) {
     <!-- Verlosung noch nicht gestartet -->
     <div class="mt-8 rounded-2xl bg-white p-10 text-center shadow-md ring-1 ring-navy/10">
@@ -127,11 +126,31 @@
             </div>
           </fieldset>
 
+          <!-- reCAPTCHA («Ich bin kein Roboter») -->
+          <div class="flex justify-center">
+            <div #captchaContainer></div>
+          </div>
+
+          @if (sendeFehler() === 'captcha') {
+            <p class="rounded-xl bg-red-100 p-4 font-semibold text-red-800">
+              Bitte bestätige zuerst, dass du kein Roboter bist.
+            </p>
+          } @else if (sendeFehler() === 'senden') {
+            <p class="rounded-xl bg-red-100 p-4 font-semibold text-red-800">
+              Ups, das Absenden hat nicht geklappt. Bitte versuche es nochmals – oder schicke
+              deine Angaben per Mail an
+              <a href="mailto:info@maislabyrinth-freiamt.ch" class="underline"
+                >info&#64;maislabyrinth-freiamt.ch</a
+              >.
+            </p>
+          }
+
           <button
             type="submit"
-            class="w-full rounded-full bg-navy px-8 py-4 text-lg font-bold text-white shadow-md transition hover:bg-navy-light"
+            [disabled]="sendet()"
+            class="w-full rounded-full bg-navy px-8 py-4 text-lg font-bold text-white shadow-md transition hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Teilnahme absenden 🎁
+            {{ sendet() ? 'Wird gesendet…' : 'Teilnahme absenden 🎁' }}
           </button>
         </form>
       </div>
@@ -150,4 +169,89 @@
     }
     }
   }
+
+  <!-- Preise -->
+  <div class="mt-8 rounded-2xl bg-white p-6 shadow-md ring-1 ring-navy/10 sm:p-10">
+    <h2 class="text-center text-2xl font-bold text-navy">Es gibt tolle Preise zu gewinnen:</h2>
+
+    <ul class="mt-6 space-y-5">
+      <li class="flex gap-3">
+        <span class="text-2xl">🚛</span>
+        <span>
+          <strong>Eine Übernachtung für zwei Personen im kleinsten Motel der Schweiz</strong>
+          hier beim Maislabyrinth (Gesamtwert: unbezahlbar)<br />
+          <a
+            href="https://www.planzer-motel.ch"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-navy underline"
+            >www.planzer-motel.ch</a
+          >
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">⛷️</span>
+        <span>
+          <strong>10x 2 Tageseintritte für das Skigebiet Arosa Lenzerheide</strong>
+          (Gesamtwert: 1780 Franken)<br />
+          <a
+            href="https://www.arosalenzerheide.swiss"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-navy underline"
+            >www.arosalenzerheide.swiss</a
+          >
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">🤸</span>
+        <span>
+          <strong>20x 1 Stunde Sprungzeit in der Jump Factory Wohlen</strong>
+          (Gesamtwert: 400 Franken)<br />
+          <a
+            href="https://www.jumpfactory.ch"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-navy underline"
+            >www.jumpfactory.ch</a
+          >
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">🧗</span>
+        <span>
+          <strong>10x 1 Gratis-Eintritt für die Kletterhalle «Bouba» in Baden.</strong>
+          Perfekt für die ganze Familie. (Gesamtwert: 300 Franken)<br />
+          <a
+            href="https://www.boulder-baden.ch"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-navy underline"
+            >www.boulder-baden.ch</a
+          >
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">🏊</span>
+        <span>
+          <strong>10x 2-Tageseintritte für den Schüwo Park Wohlen</strong>
+          – Badi, Minigolf oder Eislauf. (Gesamtwert: 150 Franken)
+        </span>
+      </li>
+      <li class="flex gap-3">
+        <span class="text-2xl">📚</span>
+        <span>
+          <strong>50 Kinderbücher von Chnorrlimorrli, Teil 2</strong>
+          (Gesamtwert: 2000 Franken)<br />
+          <a
+            href="https://www.chnorrlimorrli.ch"
+            target="_blank"
+            rel="noopener"
+            class="font-semibold text-navy underline"
+            >www.chnorrlimorrli.ch</a
+          >
+        </span>
+      </li>
+    </ul>
+  </div>
 </section>

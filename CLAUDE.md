@@ -13,7 +13,7 @@ Website for the Maislabyrinth Freiamt (a corn maze attraction in Villmergen, Swi
 - Pages live in `src/app/pages/` (one `.ts` + one `.html` per route); routes are defined in `src/app/app.routes.ts`.
 - Header/nav/footer live in the root component (`src/app/app.html`).
 - Static assets (images, `CNAME`) live in `public/`; `public/CNAME` must ship with the build output — it controls the custom domain (`maislabyrinth-freiamt.ch`).
-- The Verlosung page (`/verlosung`, linked via QR code on-site) checks the solution word ("Polenta", case-insensitive) and then submits entries via formsubmit.co to info@maislabyrinth-freiamt.ch.
+- The Verlosung page (`/verlosung`, linked via QR code on-site) checks the solution word against a salted SHA-256 hash (see `verlosung.ts` for how to regenerate it) — the word itself must never appear in code, comments, or docs. Entries are submitted to a Google Apps Script web app (`apps-script/verlosung-backend.gs`, deployed manually, writes to a Google Sheet) which server-side verifies a reCAPTCHA v2 token and the solution word. The web-app URL and reCAPTCHA site key are constants in `verlosung.ts`; the whole flow sits behind the `verlosungAktiv` flag.
 - Dashed-border placeholder blocks marked with `TODO` comments stand in for graphics (signs/sponsor boards) that haven't been delivered yet.
 
 ## Workflow
