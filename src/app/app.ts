@@ -10,10 +10,11 @@ export class App {
   protected readonly menuOpen = signal(false);
 
   protected readonly navLinks = [
-    { path: '/', label: 'Startseite' },
-    { path: '/informationen', label: 'Informationen' },
-    { path: '/partner', label: 'Partner & Sponsoren' },
-    { path: '/planzer-motel', label: 'Planzer-Motel' },
+    { path: '/', label: 'Home' },
+    { path: '/informationen', label: 'Infos' },
+    { path: '/geschichtenzeit', label: 'Geschichtenzeit' },
+    { path: '/partner', label: 'Partner' },
+    { path: '/planzer-motel', label: 'Motel' },
     { path: '/verlosung', label: 'Verlosung' },
     { path: '/ueber-uns', label: 'Über uns' },
     { path: '/kontakt', label: 'Kontakt' },
