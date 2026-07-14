@@ -1,7 +1,7 @@
 import { Component, ElementRef, computed, inject, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 type Schritt = 'raetsel' | 'formular' | 'fertig';
 type SendeFehler = 'captcha' | 'senden' | null;
@@ -27,7 +27,7 @@ declare const grecaptcha: {
 
 @Component({
   selector: 'app-verlosung',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './verlosung.html',
 })
 export class Verlosung {

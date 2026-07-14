@@ -7,6 +7,7 @@ import { Verlosung } from './pages/verlosung';
 import { Geschichtenzeit } from './pages/geschichtenzeit';
 import { UeberUns } from './pages/ueber-uns';
 import { Kontakt } from './pages/kontakt';
+import { Datenschutz } from './pages/datenschutz';
 
 export const routes: Routes = [
   { path: '', component: Home, title: 'Maislabyrinth Freiamt – Villmergen' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'verlosung', component: Verlosung, title: 'Verlosung – Maislabyrinth Freiamt' },
   { path: 'ueber-uns', component: UeberUns, title: 'Über uns – Maislabyrinth Freiamt' },
   { path: 'kontakt', component: Kontakt, title: 'Kontakt – Maislabyrinth Freiamt' },
+  { path: 'datenschutz', component: Datenschutz, title: 'Datenschutz – Maislabyrinth Freiamt' },
   { path: '**', redirectTo: '' },
 ];
