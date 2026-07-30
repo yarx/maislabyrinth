@@ -15,8 +15,9 @@ const LOESUNGSWORT_HASH = '833120237f894b1daaddff8a2b6a3fd7303e7a5ddfcd9cf4937e2
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfn_Hfl0AbPpBaDz7JUPBdG1hBmed4lxZU7ueBwjfQ8010YYWrq3US0wp5U_ywZZQxig/exec';
 const RECAPTCHA_SITE_KEY = '6LeqEVMtAAAAAIVE5e3-uvRzHgAKCB-utloAb2l9';
 
-// Ab diesem Zeitpunkt (lokale Zeit) ist die Verlosung automatisch freigeschaltet
-const VERLOSUNG_START = new Date(2026, 7, 1); // 1. August 2026, 00:00 Uhr
+// Ab diesem Zeitpunkt ist die Verlosung automatisch freigeschaltet:
+// 1. August 2026, 08:00 Uhr Schweizer Zeit (CEST = UTC+2), unabhängig von der Zeitzone des Geräts
+const VERLOSUNG_START = new Date('2026-08-01T08:00:00+02:00');
 
 declare const grecaptcha: {
   ready(callback: () => void): void;
