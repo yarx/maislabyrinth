@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home';
+import { Geschlossen } from './pages/geschlossen';
 import { Infos } from './pages/infos';
 import { Partner } from './pages/partner';
 import { PlanzerMotel } from './pages/planzer-motel';
@@ -10,7 +11,10 @@ import { Kontakt } from './pages/kontakt';
 import { Datenschutz } from './pages/datenschutz';
 
 export const routes: Routes = [
-  { path: '', component: Home, title: 'Maislabyrinth Freiamt – Villmergen' },
+  // Saison vorbei: Startseite zeigt nur die Abschiedsinfo (vollbild = ohne Header/Footer).
+  // Die bisherige Startseite bleibt unter /home erreichbar.
+  { path: '', component: Geschlossen, title: 'Maislabyrinth Freiamt – Villmergen', data: { vollbild: true } },
+  { path: 'home', component: Home, title: 'Maislabyrinth Freiamt – Villmergen' },
   { path: 'informationen', component: Infos, title: 'Wichtige Informationen – Maislabyrinth Freiamt' },
   { path: 'geschichtenzeit', component: Geschichtenzeit, title: 'Geschichtenzeit – Maislabyrinth Freiamt' },
   { path: 'partner', component: Partner, title: 'Partner und Sponsoren – Maislabyrinth Freiamt' },

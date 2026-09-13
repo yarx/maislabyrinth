@@ -1,8 +1,9 @@
 <div class="flex min-h-screen flex-col bg-cream text-stone-800">
+  @if (!vollbild()) {
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-navy shadow-lg">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-      <a routerLink="/" (click)="closeMenu()" class="py-1.5">
+      <a routerLink="/home" (click)="closeMenu()" class="py-1.5">
         <span class="text-lg font-extrabold tracking-tight text-white sm:text-xl">
           Maislabyrinth <span class="text-mais">Freiamt</span>
         </span>
@@ -59,12 +60,14 @@
       </nav>
     }
   </header>
+  }
 
   <!-- Seiteninhalt -->
   <main class="flex-1">
     <router-outlet />
   </main>
 
+  @if (!vollbild()) {
   <!-- Footer -->
   <footer class="mt-12 bg-navy-dark text-white">
     <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
@@ -105,4 +108,5 @@
       <a routerLink="/datenschutz" class="underline hover:text-mais">Datenschutz</a>
     </div>
   </footer>
+  }
 </div>
